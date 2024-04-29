@@ -1,7 +1,7 @@
 server:
-  port: 7801
+  port: 7802
   servlet:
-    context-path: /api/mongo
+    context-path: /api/arthas
 spring:
   profiles:
     active: ${profiles.active}
