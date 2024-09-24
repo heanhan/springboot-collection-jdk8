@@ -19,6 +19,7 @@
     <module>springboot-arthas-demo</module>
     <module>springboot-mongodb</module>
     <module>springboot-oauth</module>
+      <module>springboot-webservice</module>
 
   </modules>
 
