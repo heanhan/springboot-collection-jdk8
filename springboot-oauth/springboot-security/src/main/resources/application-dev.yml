@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: security-dev
+  #配置mysql数据库
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.16.75.105:3306/springboot_security?serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: root
+    password: abcd@123456
+  #redis配置
+  redis:
+    host: 172.16.75.105
+    port: 6379
+    password: abcd@123456
+  jpa:
+    database: mysql
+    hibernate:
+      ddl-auto: update
+      naming:
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+    show-sql: true
