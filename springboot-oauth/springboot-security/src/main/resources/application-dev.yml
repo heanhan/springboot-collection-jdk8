@@ -19,3 +19,8 @@ spring:
       naming:
         implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
     show-sql: true
+token:
+  # 加解密 盐
+  secretKey: qazwsx
+  #有效期 2小时
+  expireTime: 7200
