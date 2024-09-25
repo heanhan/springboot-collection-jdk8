@@ -10,7 +10,7 @@
 
     <groupId>com.example.jdk8</groupId>
     <artifactId>springboot-collection-jdk8</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>pom</packaging>
 
     <name>springboot-collection-jdk8</name>
@@ -18,12 +18,15 @@
     <modules>
         <module>springboot-arthas-demo</module>
         <module>springboot-mongodb</module>
-        <module>springboot-oauth</module>
         <module>springboot-webservice</module>
+        <module>springboot-commons</module>
+        <module>springboot-auth</module>
 
     </modules>
 
     <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <boot-version>2.6.15</boot-version>
         <spring-cloud-version>2021.0.1</spring-cloud-version>

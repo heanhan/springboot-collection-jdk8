@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: springboot-security-prod
+  #配置mysql数据库
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.16.75.105:3306/springboot_security?serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: root
+    password: abcd@123456
