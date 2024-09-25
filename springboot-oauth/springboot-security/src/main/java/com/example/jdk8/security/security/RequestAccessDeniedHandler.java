@@ -32,6 +32,5 @@ public class RequestAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         log.info("进入认证通过但是权限不足的处理器内部");
-
     }
 }

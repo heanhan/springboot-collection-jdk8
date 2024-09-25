@@ -33,10 +33,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         log.info("账号：{} ->开始认证",username);
         UserAuth userAuth = userAuthService.findByUsername(username);
-        if(ObjectUtils.isEmpty(userAuth)){
-            //如果用户存在且有效
-
+        // 查询不到用户信息则抛出异常
+        if (ObjectUtils.isEmpty(userAuth)) {
+            throw new RuntimeException("用户名或密码有误");
         }
-        return null;
+        // TODO 在授权时返回此处。 根据用户查询权限信息，再添加到 LoginUser 中。
+        return userAuth;
     }
 }

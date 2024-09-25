@@ -1,6 +1,7 @@
 package com.example.jdk8.security.service;
 
 import com.example.jdk8.security.entity.UserAuth;
+import com.example.jdk8.security.model.vo.RegisterUserVo;
 
 /**
  * @author zhaojh
@@ -16,4 +17,11 @@ public interface UserAuthService {
      * @return
      */
     UserAuth findByUsername(String username);
+
+    /**
+     * 用户注册
+     * @param registerUserVo
+     * @return
+     */
+    Boolean registerUser(RegisterUserVo registerUserVo);
 }

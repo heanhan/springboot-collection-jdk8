@@ -1,10 +1,9 @@
 package com.example.jdk8.security.security;
 
+import com.example.jdk8.security.common.utils.JwtUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.annotation.Resource;
@@ -13,8 +12,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author zhaojh
@@ -25,43 +22,42 @@ import java.util.Map;
 public class PerThreadRequestFilter extends OncePerRequestFilter {
 
     @Resource
-    private StringRedisTemplate redisTemplate;
+    private JwtUtil jwtUtil;
 
     @Override
-    protected void doFilterInternal
-            (HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        // 从请求头获取token
         String token = request.getHeader("token");
-
-        if (ObjectUtils.isEmpty(token)){
-            filterChain.doFilter(request,response);
+        // 检查获取到的token是否为空或空白字符串。(判断给定的字符串是否包含文本)
+        if (!StringUtils.hasText(token)) {
+            // 如果token为空，则直接放行请求到下一个过滤器，不做进一步处理并结束当前方法，不继续执行下面代码。
+            filterChain.doFilter(request, response);
             return;
         }
-
-        Claims claims = null;
+        // 解析token
+        String userAccount;
         try {
-            claims = JwtUtil.parseJWT(token);
+            Claims claims = jwtUtil.parseJWT(token);
+            userAccount = claims.getSubject();
         } catch (Exception e) {
             e.printStackTrace();
-            Map<String, String> errMsg = new HashMap<>();
-            errMsg.put("code","200");
-            errMsg.put("msg","访问失败，请重新登录");
-            response.setContentType("text/json;charset=utf-8");
-            response.getWriter().print(errMsg.toString());
-            return;
+            throw new RuntimeException("token非法");
         }
+        // 从redis 中 获取 用户信息
+        String redisKey = "login:" + userAccount;
+        // redis 获取 键 对应 数据
+//        LoginUser loginUser = redisCache.getCacheObject(redisKey);
+//        if (Objects.isNull(loginUser)) {
+//            throw new RuntimeException("用户未登录");
+//        }
+        // 将用户信息存入 SecurityConText
+        // UsernamePasswordAuthenticationToken 存储用户名 密码 权限的集合
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser, null, null);
+//        // SecurityContextHolder是Spring Security用来存储当前线程安全的认证信息的容器。
+//        // 将用户名 密码 权限的集合存入SecurityContextHolder
+//        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+        // 放行
+        filterChain.doFilter(request, response);
 
-        Integer userId = Integer.valueOf(claims.getSubject());
-
-        UserContext.setUser(userId);
-        String userAdmin = redisTemplate.opsForValue().get("userId" + userId);
-
-        AdminLogin adminLogin = JSONUtil.toBean(userAdmin, AdminLogin.class);
-
-
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(adminLogin.getUsername(), adminLogin.getUsername(), null);
-//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(null, null, null);
-        SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-
-        filterChain.doFilter(request,response);
     }
 }
