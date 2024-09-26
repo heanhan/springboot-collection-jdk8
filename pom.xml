@@ -16,10 +16,10 @@
     <name>springboot-collection-jdk8</name>
 
     <modules>
+        <module>springboot-commons</module>
         <module>springboot-arthas-demo</module>
         <module>springboot-mongodb</module>
         <module>springboot-webservice</module>
-        <module>springboot-commons</module>
         <module>springboot-auth</module>
 
     </modules>

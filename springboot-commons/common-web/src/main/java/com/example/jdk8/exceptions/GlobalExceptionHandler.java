@@ -16,6 +16,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import javax.annotation.PostConstruct;
+import javax.security.sasl.AuthenticationException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -122,6 +123,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResultBody.error(CommonEnum.PARAM_TYPE_MISMATCH.getResultCode(), "报错的服务: "+errorSystem +",错误详情: "+ e.getMessage());
     }
 
+    //AuthenticationException
+    @ExceptionHandler({ArithmeticException.class})
+    public ResultBody exception(AuthenticationException e, HttpServletRequest request, HttpServletResponse response) {
+        log.error("request error!! method:{} uri:{}", request.getMethod(), request.getRequestURI());
+        log.error("服务报错详情：{},", "报错的服务: "+errorSystem +",错误详情: "+ e.toString());
+        return ResultBody.error(CommonEnum.PARAM_TYPE_MISMATCH.getResultCode(), "报错的服务: "+errorSystem +",错误详情: "+ e.getMessage());
+    }
     /**
      * 处理其他异常
      *

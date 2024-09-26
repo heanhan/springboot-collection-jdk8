@@ -1,7 +1,7 @@
 server:
   port: 9990
   servlet:
-    context-path: /security/api
+    context-path: /api
 spring:
   profiles:
     active: @profiles.active@
