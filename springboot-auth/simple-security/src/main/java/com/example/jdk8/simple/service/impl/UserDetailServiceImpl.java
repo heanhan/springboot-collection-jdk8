@@ -57,9 +57,14 @@ public class UserDetailServiceImpl implements UserDetailsService {
         // 查询账号角色和菜单
         List<Role> roleList = roleService.findRolesByUserInfoId(userInfo.getId());
         Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+        //将用户的角色放入列表
+//        String collect = roleList.stream().map(Role::getRoleName).collect(Collectors.joining(","));
+//        grantedAuthorities.add(new SimpleGrantedAuthority(collect));
         for (Role role : roleList) {
             grantedAuthorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-            role.setMenuList();
+            role.getMenuList().stream()
+                    .map(p -> new SimpleGrantedAuthority(p.getName()))
+                    .forEach(grantedAuthorities::add);
         }
         userAuth.setAthorities(grantedAuthorities);
         return userAuth;

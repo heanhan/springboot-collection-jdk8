@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @author zhaojh
- * @description: TODO
+ * @description: 角色持久层
  * @date 2024-09-24
  */
 @Repository
@@ -22,12 +22,9 @@ public interface RoleDao extends JpaRepository<Role, Integer>, JpaSpecificationE
      * @param userInfoId user_info 表中的id
      * @return
      */
-    @Query(value = " select r* " +
-            " from role r "+
-            " left join  user_role ur on r.id=ur.role_id " +
-            " left join user_info u on u.id=ur.user_id " +
-            " left join role_menu rm on rm.role_id=r.id " +
-            " left join menu m on m.id=rm.menu_id " +
+    @Query(value = " select  r from Role r "+
+            " left join  UserRole ur on r.id=ur.roleId " +
+            " left join UserInfo u on u.id=ur.userId " +
             " where u.id=?1" )
     List<Role> findRolesByUserInfoId(Integer userInfoId);
 }

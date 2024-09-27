@@ -1,7 +1,9 @@
 package com.example.jdk8.simple.service.impl;
 
 import com.example.jdk8.simple.dao.RoleDao;
+import com.example.jdk8.simple.entity.Menu;
 import com.example.jdk8.simple.entity.Role;
+import com.example.jdk8.simple.service.MenuService;
 import com.example.jdk8.simple.service.RoleService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -22,6 +24,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Resource
     private RoleDao roleDao;
+
+    @Resource
+    private MenuService menuService;
+
     /**
      * 根据用户获取角色
      *
@@ -30,7 +36,11 @@ public class RoleServiceImpl implements RoleService {
      */
     @Override
     public List<Role> findRolesByUserInfoId(Integer userInfoId) {
-        List<Role> rolesByUserInfoId = roleDao.findRolesByUserInfoId(userInfoId);
-        return roleDao.findRolesByUserInfoId(userInfoId);
+        List<Role> roles= roleDao.findRolesByUserInfoId(userInfoId);
+        roles.forEach(item->{
+            List<Menu> menus=menuService.findMenuByRoleId(item.getId());
+            item.setMenuList(menus);
+        });
+        return roles;
     }
 }
