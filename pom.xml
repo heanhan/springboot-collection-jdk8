@@ -21,6 +21,7 @@
         <module>springboot-mongodb</module>
         <module>springboot-webservice</module>
         <module>springboot-auth</module>
+        <module>springboot-mdc-log</module>
 
     </modules>
 

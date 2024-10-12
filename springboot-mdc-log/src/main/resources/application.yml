@@ -1,0 +1,11 @@
+server:
+  port: 9990
+  servlet:
+    context-path: /mdc
+spring:
+  profiles:
+    active: @profiles.active@
+logging:
+  file:
+    path: classpath:logback-spring.xml
+#配置地址
