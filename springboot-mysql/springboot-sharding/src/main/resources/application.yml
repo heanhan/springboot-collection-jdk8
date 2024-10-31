@@ -1,0 +1,13 @@
+server:
+  port: 7901
+  servlet:
+    context-path: /sharding
+spring:
+  application:
+    name: springboot-sharding
+  #配置mysql数据库
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.16.75.105:3306/springboot_sharding-db0?serverTimezone=GMT%2B8&allowMultiQueries=true
+    username: root
+    password: abcd@123456
