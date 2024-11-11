@@ -24,6 +24,7 @@
         <module>springboot-mdc-log</module>
         <module>springboot-es</module>
         <module>springboot-mysql</module>
+        <module>springboot-files</module>
 
     </modules>
 

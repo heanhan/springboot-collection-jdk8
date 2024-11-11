@@ -1,0 +1,4 @@
+server:
+  port: 9705
+  servlet:
+    context-path: /pdf

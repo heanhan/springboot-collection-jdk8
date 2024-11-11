@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.jdk8.sharding.mapper.CourseMapper">
+    <resultMap id="BaseResultMap" type="com.example.jdk8.sharding.entity.Course">
+        <!--@mbg.generated-->
+        <!--@Table springboot_sharding_db0.course-->
+        <id column="cid" jdbcType="BIGINT" property="cid" />
+        <result column="cname" jdbcType="VARCHAR" property="cname" />
+        <result column="user_id" jdbcType="BIGINT" property="userId" />
+        <result column="cstatus" jdbcType="VARCHAR" property="cstatus" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        cid, cname, user_id, cstatus
+    </sql>
+    <insert id="insertSelective" parameterType="com.example.jdk8.sharding.entity.Course">
+        <!--@mbg.generated-->
+        insert into springboot_sharding_db0.course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cid != null">
+                cid,
+            </if>
+            <if test="cname != null">
+                cname,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="cstatus != null">
+                cstatus,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="cid != null">
+                #{cid,jdbcType=BIGINT},
+            </if>
+            <if test="cname != null">
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="cstatus != null">
+                #{cstatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.example.jdk8.sharding.entity.Course">
+        <!--@mbg.generated-->
+        update springboot_sharding_db0.course
+        <set>
+            <if test="cname != null">
+                cname = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="cstatus != null">
+                cstatus = #{cstatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where cid = #{cid,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.example.jdk8.sharding.entity.Course">
+        <!--@mbg.generated-->
+        update springboot_sharding_db0.course
+        set cname = #{cname,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=BIGINT},
+        cstatus = #{cstatus,jdbcType=VARCHAR}
+        where cid = #{cid,jdbcType=BIGINT}
+    </update>
+    <update id="updateBatch" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        update springboot_sharding_db0.course
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="cname = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when cid = #{item.cid,jdbcType=BIGINT} then #{item.cname,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+            <trim prefix="user_id = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when cid = #{item.cid,jdbcType=BIGINT} then #{item.userId,jdbcType=BIGINT}
+                </foreach>
+            </trim>
+            <trim prefix="cstatus = case" suffix="end,">
+                <foreach collection="list" index="index" item="item">
+                    when cid = #{item.cid,jdbcType=BIGINT} then #{item.cstatus,jdbcType=VARCHAR}
+                </foreach>
+            </trim>
+        </trim>
+        where cid in
+        <foreach close=")" collection="list" item="item" open="(" separator=", ">
+            #{item.cid,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsert" parameterType="map">
+        <!--@mbg.generated-->
+        insert into springboot_sharding_db0.course
+        (cid, cname, user_id, cstatus)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.cid,jdbcType=BIGINT}, #{item.cname,jdbcType=VARCHAR}, #{item.userId,jdbcType=BIGINT},
+            #{item.cstatus,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+    <delete id="deleteByPrimaryKeyIn">
+        <!--@mbg.generated-->
+        delete from springboot_sharding_db0.course where cid in
+        <foreach close=")" collection="list" item="cid" open="(" separator=", ">
+            #{cid,jdbcType=BIGINT}
+        </foreach>
+    </delete>
+    <update id="updateBatchUseMultiQuery" parameterType="java.util.List">
+        <!--@mbg.generated-->
+        <foreach collection="list" item="item" separator=";">
+            update springboot_sharding_db0.course
+            <set>
+                <if test="item.cname != null">
+                    cname = #{item.cname,jdbcType=VARCHAR},
+                </if>
+                <if test="item.userId != null">
+                    user_id = #{item.userId,jdbcType=BIGINT},
+                </if>
+                <if test="item.cstatus != null">
+                    cstatus = #{item.cstatus,jdbcType=VARCHAR},
+                </if>
+            </set>
+            where cid = #{item.cid,jdbcType=BIGINT}
+        </foreach>
+    </update>
+    <insert id="batchInsertSelectiveUseDefaultForNull" parameterType="map">
+        <!--@mbg.generated-->
+        insert into springboot_sharding_db0.course
+        (cid, cname, user_id, cstatus)
+        values
+        <foreach collection="list" item="item" separator=",">
+            (
+            <choose>
+                <when test="item.cid != null">
+                    #{item.cid,jdbcType=BIGINT},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.cname != null">
+                    #{item.cname,jdbcType=VARCHAR},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.userId != null">
+                    #{item.userId,jdbcType=BIGINT},
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT,
+                </otherwise>
+            </choose>
+            <choose>
+                <when test="item.cstatus != null">
+                    #{item.cstatus,jdbcType=VARCHAR}
+                </when>
+                <!--@ignoreSql-->
+                <otherwise>
+                    DEFAULT
+                </otherwise>
+            </choose>
+            )
+        </foreach>
+    </insert>
+    <insert id="insertOrUpdate" parameterType="com.example.jdk8.sharding.entity.Course">
+        <!--@mbg.generated-->
+        insert into springboot_sharding_db0.course
+        (cid, cname, user_id, cstatus)
+        values
+        (#{cid,jdbcType=BIGINT}, #{cname,jdbcType=VARCHAR}, #{userId,jdbcType=BIGINT}, #{cstatus,jdbcType=VARCHAR}
+        )
+        on duplicate key update
+        cid = #{cid,jdbcType=BIGINT},
+        cname = #{cname,jdbcType=VARCHAR},
+        user_id = #{userId,jdbcType=BIGINT},
+        cstatus = #{cstatus,jdbcType=VARCHAR}
+    </insert>
+    <insert id="insertOrUpdateSelective" parameterType="com.example.jdk8.sharding.entity.Course">
+        <!--@mbg.generated-->
+        insert into springboot_sharding_db0.course
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cid != null">
+                cid,
+            </if>
+            <if test="cname != null">
+                cname,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="cstatus != null">
+                cstatus,
+            </if>
+        </trim>
+        values
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="cid != null">
+                #{cid,jdbcType=BIGINT},
+            </if>
+            <if test="cname != null">
+                #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="cstatus != null">
+                #{cstatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+        on duplicate key update
+        <trim suffixOverrides=",">
+            <if test="cid != null">
+                cid = #{cid,jdbcType=BIGINT},
+            </if>
+            <if test="cname != null">
+                cname = #{cname,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="cstatus != null">
+                cstatus = #{cstatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>
