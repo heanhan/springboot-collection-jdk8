@@ -2,3 +2,7 @@ server:
   port: 9651
   servlet:
     context-path: /zip
+spring:
+  servlet:
+    multipart:
+      max-file-size: 100MB
