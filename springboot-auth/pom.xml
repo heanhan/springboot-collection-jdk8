@@ -14,6 +14,7 @@
     <modules>
         <module>simple-security</module>
         <module>jwt-security</module>
+        <module>springboot-security-oauth</module>
     </modules>
 
     <dependencies>

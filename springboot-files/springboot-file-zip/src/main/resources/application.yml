@@ -1,0 +1,4 @@
+server:
+  port: 9651
+  servlet:
+    context-path: /zip
