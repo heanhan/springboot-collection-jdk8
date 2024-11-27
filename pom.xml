@@ -25,6 +25,8 @@
         <module>springboot-es</module>
         <module>springboot-mysql</module>
         <module>springboot-files</module>
+        <module>springboot-rocketmq</module>
+        <module>springboot-test-all</module>
 
     </modules>
 

@@ -1,10 +1,10 @@
-package com.example.jdk8.es;
+package com.example.jdk8.rocketmq;
 
 /**
  * Hello world!
  *
  */
-public class App 
+public class RocketMQApplication
 {
     public static void main( String[] args )
     {
