@@ -23,7 +23,4 @@
         <module>common-web</module>
     </modules>
 
-    <dependencies>
-
-    </dependencies>
 </project>

@@ -1,0 +1,11 @@
+spring:
+  profiles:
+    active: @profiles.active@
+  #springboot 2.6以后处理的循环依赖问题
+  main:
+    allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  application:
+    name: springboot-jpa
