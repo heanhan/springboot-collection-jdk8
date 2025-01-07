@@ -35,6 +35,11 @@ public class PersonServiceImpl implements PersonService {
     @Resource
     private PersonDao personDao;
 
+    /**
+     * 分页查询 多条件
+     * @param vo 参数
+     * @return
+     */
     @Override
     public Page<Person> findAllPersonByPage(PersonPageVo vo) {
 //        PageRequest pageRequest = PageRequest.of(vo.getIndex() - 1, vo.getSize());

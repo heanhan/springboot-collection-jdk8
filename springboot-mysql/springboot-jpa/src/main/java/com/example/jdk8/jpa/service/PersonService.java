@@ -13,5 +13,10 @@ import org.springframework.data.domain.Page;
  */
 public interface PersonService {
 
+    /**
+     * 分页查询 多条件
+     * @param personPageVo
+     * @return
+     */
     Page<Person> findAllPersonByPage(PersonPageVo personPageVo);
 }
