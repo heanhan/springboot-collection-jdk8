@@ -3,6 +3,8 @@ package com.example.jdk8.jpa.service.impl;
 
 import com.example.jdk8.jpa.dao.PersonDao;
 import com.example.jdk8.jpa.entity.Person;
+import com.example.jdk8.jpa.model.dto.PersonDto;
+import com.example.jdk8.jpa.model.vo.PersonConditionVo;
 import com.example.jdk8.jpa.model.vo.PersonPageVo;
 import com.example.jdk8.jpa.service.PersonService;
 import org.springframework.data.domain.Example;
@@ -19,6 +21,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -54,5 +57,17 @@ public class PersonServiceImpl implements PersonService {
         };
         Page<Person> all = personDao.findAll(spec, pageRequest);
         return all;
+    }
+
+    /**
+     * @param vo
+     * @description: 动态条件查询用户信息 列表
+     * @date: 2025/1/13
+     * @param: vo
+     */
+    @Override
+    public List<PersonDto> findAllPersonByCondition(PersonConditionVo vo) {
+        List<PersonDto> result = personDao.findAllPersonByCondition(vo);
+        return result;
     }
 }
