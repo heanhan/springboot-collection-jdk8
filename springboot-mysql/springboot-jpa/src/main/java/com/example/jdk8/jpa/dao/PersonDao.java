@@ -23,8 +23,16 @@ import java.util.List;
 public interface PersonDao extends JpaRepository<Person,Long>, JpaSpecificationExecutor<Person> {
 
 
+    /**
+     * @description: 返回自定义的实体类的实现方式
+     * @date: 2025/1/13
+     * @param: vo 动态条件
+     **/
     @Query(value = " select p from Person p " +
             " where p.isDeleted = 0 " +
-            " and if()")
+            " and (:#{#vo.id }  is null or p.id = :#{#vo.getId()})" +
+            " and (:#{#vo.getUserName()} is null or p.userName like %:#{#vo.getUserName()}%) " +
+            " and (:#{#vo.startTime }  is null or p.createdTime >= :#{#vo.startTime()})" +
+            " and (:#{#vo.endTime }  is null or p.createdTime <= :#{#vo.endTime()})")
     List<PersonDto> findAllPersonByCondition(@Param("vo") PersonConditionVo vo);
 }

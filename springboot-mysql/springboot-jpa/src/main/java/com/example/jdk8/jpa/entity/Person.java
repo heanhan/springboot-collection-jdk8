@@ -79,6 +79,6 @@ public class Person implements Serializable {
     private Date lastModifiedTime;
 
     @Column(name = "is_deleted")
-    private Boolean isDeleted;
+    private int isDeleted;
 
 }
