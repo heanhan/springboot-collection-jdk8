@@ -3,24 +3,25 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.example.jdk8</groupId>
-        <artifactId>springboot-mysql</artifactId>
+        <artifactId>springboot-files</artifactId>
         <version>1.0</version>
     </parent>
 
-    <artifactId>springboot-jpa</artifactId>
+    <artifactId>springboot-fastexcel</artifactId>
     <packaging>jar</packaging>
 
-    <name>springboot-jpa</name>
+    <name>springboot-fastexcel</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-
+        <!--引入公共的类-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
+            <groupId>com.example.jdk8</groupId>
+            <artifactId>common-web</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <!--调用最新的fastexcel 的组件-->
@@ -29,6 +30,5 @@
             <artifactId>fastexcel</artifactId>
             <version>1.0.0</version>
         </dependency>
-
     </dependencies>
 </project>

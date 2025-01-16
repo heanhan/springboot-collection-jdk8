@@ -15,6 +15,7 @@
         <module>springboot-file-demo</module>
         <module>springboot-pdf</module>
         <module>springboot-file-zip</module>
+        <module>springboot-fastexcel</module>
     </modules>
 
     <properties>

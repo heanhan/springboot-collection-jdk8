@@ -3,10 +3,12 @@ package com.example.jdk8.jpa.service;
 
 import com.example.jdk8.jpa.entity.Person;
 import com.example.jdk8.jpa.model.dto.PersonDto;
+import com.example.jdk8.jpa.model.vo.PersonAddVo;
 import com.example.jdk8.jpa.model.vo.PersonConditionVo;
 import com.example.jdk8.jpa.model.vo.PersonPageVo;
 import org.springframework.data.domain.Page;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -30,4 +32,11 @@ public interface PersonService {
      * @param: vo
      **/
     List<PersonDto> findAllPersonByCondition(PersonConditionVo vo);
+
+    /**
+     * @description: 新增Person
+     * @date: 2025/1/15
+     * @param: vo
+     **/
+    Boolean addPerson(@Valid PersonAddVo vo);
 }
