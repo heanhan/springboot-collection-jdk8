@@ -1,0 +1,4 @@
+server:
+  port: 9801
+  servlet:
+    context-path: /tenant/jpa
