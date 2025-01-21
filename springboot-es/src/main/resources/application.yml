@@ -1,7 +1,0 @@
-server:
-  port: 9705
-  servlet:
-    context-path: /es
-spring:
-  profiles:
-    active:

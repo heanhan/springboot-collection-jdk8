@@ -1,0 +1,4 @@
+server:
+  port: 9617
+  servlet:
+    context-path: /fastexcel
