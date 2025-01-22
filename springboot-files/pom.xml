@@ -16,6 +16,7 @@
         <module>springboot-pdf</module>
         <module>springboot-file-zip</module>
         <module>springboot-fastexcel</module>
+        <module>springboot-minio</module>
     </modules>
 
     <properties>

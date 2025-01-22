@@ -1,0 +1,12 @@
+server:
+  port: 9810
+  servlet:
+    context-path: /minio/es
+spring:
+  profiles:
+    active: @profiles.active@
+#  main:
+      #循环依赖中对bean的覆盖
+#    allow-bean-definition-overriding: true
+      #spring bean 允许循环依赖 借用三级缓存， springboot 高版本中将其设置为false
+#    allow-circular-references: true
