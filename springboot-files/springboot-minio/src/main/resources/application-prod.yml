@@ -1,25 +1,24 @@
 spring:
   application:
     name: SpringBoot-ElasticSearch
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
-    password: root
-    url: jdbc:mysql:///db7?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
-  data:
-    elasticsearch:
-      client:
-        reactive:
-          endpoints: 127.0.0.1:9200
-  servlet:
-    multipart:
-      max-file-size: 20MB
-      max-request-size: 20MB
-
+    password: abcd@123456
+    url: jdbc:mysql://172.16.75.105:3306/springboot-files?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
+  elasticsearch:
+    uris: http://172.16.75.105:9200
+    username: elastic
+    password: abcd@123456
+    connection-timeout: 1s
 # jpa配置
 
 minio:
-  endpoint: http://127.0.0.1:9000
-  accessKey: 3x2K4oPLqIzvrEL6w2ya
-  secretKey: xPx2PYoNbbxRmEYXgJVUmsPr5zf8OycyiJQJWzKl
+  endpoint: http://172.16.75.105:9000
+  accessKey: AVZRcr1csM4AAmFhhp5l
+  secretKey: xz8d8sF52ds4HJYIhrGH9WyFT2GJdXm0yqvd6c2z
 

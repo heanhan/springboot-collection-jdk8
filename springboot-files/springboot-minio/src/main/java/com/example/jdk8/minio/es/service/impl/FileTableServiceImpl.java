@@ -4,6 +4,7 @@ package com.example.jdk8.minio.es.service.impl;
 import com.example.jdk8.minio.es.dao.FileTableDao;
 import com.example.jdk8.minio.es.entity.FileTable;
 import com.example.jdk8.minio.es.service.FileTableService;
+import com.example.jdk8.minio.es.utils.FileUtils;
 import com.example.jdk8.minio.es.utils.MinioUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,6 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -51,6 +51,9 @@ public class FileTableServiceImpl implements FileTableService {
     @Resource
     private MinioUtils minioUtils;
 
+    @Resource
+    private FileUtils fileUtils;
+
     /**
      * 实例化完成后创建索引
      */
@@ -73,7 +76,7 @@ public class FileTableServiceImpl implements FileTableService {
      */
     @Override
     public FileTable insert(FileTable fileTable) {
-        this.fileTableMapper.insert(fileTable);
+        fileTableDao.save(fileTable);
         return fileTable;
     }
 
@@ -93,22 +96,20 @@ public class FileTableServiceImpl implements FileTableService {
         Assert.notNull(file.getOriginalFilename(), "文件名不能为空");
         String fileType = file.getOriginalFilename().split("\\.")[1];
         minioUtils.putObject(bucketName, objectName, file.getInputStream(), file.getSize(), fileType);
-
         // 插入数据库数据
         String fileUrl = minioUtils.getObjectUrl(bucketName, objectName);
         FileTable fileTable = new FileTable();
         fileTable.setFileName(objectName);
         fileTable.setFilePath(fileUrl);
-        fileTable.setIsDeleted(0L);
+        fileTable.setIsDeleted(0);//数据有效
         fileTable.setFileType(fileType);
         fileTable.setFileSize(file.getSize());
-        fileTableMapper.insert(fileTable);
-
+        fileTableDao.save(fileTable);
         // 读取文件内容，上传到es，方便后续的检索  可以考虑使用消息队列，提高效率  因为读取文件内容比较耗时
         // 这里为了演示，直接读取文件内容，上传到es
-        String fileContent = FileUtils.readFileContent(file.getInputStream(), fileType);
+        String fileContent = fileUtils.readFileContent(file.getResource().getFile(), fileType);
         fileTable.setFileContent(fileContent);
-        fileTableRepository.save(fileTable);
+        fileTableDao.save(fileTable);
     }
 
     @Override
@@ -127,23 +128,17 @@ public class FileTableServiceImpl implements FileTableService {
         highlightBuilder.order();
         queryBuilder.withHighlightBuilder(highlightBuilder);
 //        queryBuilder.withHighlightFields(new HighlightBuilder.Field("fileName"));
-
         // 也可以添加分页和排序
         SortBuilder<FieldSortBuilder> sortBuilder = new FieldSortBuilder("fileSize").order(SortOrder.DESC);
         queryBuilder.withSort(sortBuilder).withPageable(PageRequest.of(0, 10)); // 表示第一页，每页10条
-
         NativeSearchQuery nativeSearchQuery = queryBuilder.build();
-
         SearchHits<FileTable> searchHits = elasticsearchOperations.search(nativeSearchQuery, FileTable.class);
-
         searchHits.forEach(item -> {
             FileTable fileTable = item.getContent();
             System.out.println("Highlighted FileName: " + item.getHighlightFields().get("fileName"));
             System.out.println("Highlighted FileContent: " + item.getHighlightFields().get("fileContent"));
         });
-
         ArrayList<FileTable> fileTables = new ArrayList<>();
-
         searchHits.forEach(item -> {
             fileTables.add(item.getContent());
         });

@@ -9,10 +9,15 @@ import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.RemoveBucketArgs;
+import io.minio.Result;
+import io.minio.http.Method;
+import io.minio.messages.Item;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 
 /**
  * @author zhaojh
@@ -23,7 +28,8 @@ import java.io.ByteArrayInputStream;
 @Component
 public class MinioUtils {
 
-    private final MinioClient minioClient;
+    @Resource
+    private MinioClient minioClient;
 
     public MinioUtils(MinioClient minioClient) {
         this.minioClient = minioClient;

@@ -1,15 +1,18 @@
 package com.example.jdk8.minio.es.utils;
 
 
+import com.example.jdk8.exceptins.BizException;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.pdfbox.Loader;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.apache.poi.xwpf.extractor.XWPFWordExtractor;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
-import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -23,6 +26,8 @@ import java.util.List;
  * @description TODO
  * @date 2025/1/22 下午3:58
  */
+@Slf4j
+@Component
 public class FileUtils {
 
     private static final List<String> FILE_TYPE;
@@ -33,9 +38,24 @@ public class FileUtils {
     }
 
 
-    @SneakyThrows
-    public static String readFileContent(File file, String fileType) {
-        file.
+    public  String readFileContent(File file, String fileType) {
+        FileInputStream inputStream=null;
+        //判断文件是否存在
+        if(file.exists()){
+            try{
+                inputStream = new FileInputStream(file);
+                // 使用 inputStream 读取文件内容
+                byte[] buffer = new byte[1024];
+                int bytesRead;
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    // 处理读取到的字节数据
+                }
+            }catch (BizException | IOException e){
+                log.info("文件读取异常：{}",e);
+            }
+        }else{
+            throw new BizException("文件不存在");
+        }
         if (!FILE_TYPE.contains(fileType)) {
             return null;
         }
@@ -58,7 +78,7 @@ public class FileUtils {
      * @param: inputStream
      **/
     @SneakyThrows
-    private static String readPdfContent(InputStream inputStream) {
+    private  String readPdfContent(InputStream inputStream) {
         // 加载PDF文档
         // pdfbox 到了3.0.3 版本 PDDocument.load() 改为 Loader.loadPDF()
         PDDocument pdDocument = Loader.loadPDF(new File(""));
@@ -76,7 +96,7 @@ public class FileUtils {
  * @date: 2025/1/22
  * @param: inputStream
  **/
-    private static String readDocOrDocxContent(InputStream inputStream) {
+    private  String readDocOrDocxContent(InputStream inputStream) {
         try {
             // 加载DOC文档
             XWPFDocument document = new XWPFDocument(inputStream);
@@ -94,7 +114,7 @@ public class FileUtils {
  * @date: 2025/1/22
  * @param: inputStream
  **/
-    private static String readTextContent(InputStream inputStream) {
+    private  String readTextContent(InputStream inputStream) {
         StringBuilder content = new StringBuilder();
         try (InputStreamReader isr = new InputStreamReader(inputStream, StandardCharsets.UTF_8)) {
             int ch;

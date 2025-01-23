@@ -18,7 +18,7 @@ import java.io.Serializable;
 @Data
 @Document(indexName = "file_table")
 public class FileTable implements Serializable {
-    private static final long serialVersionUID = -84031829975035928L;
+
     /**
      * 文件表主键，自增 ID
      */
