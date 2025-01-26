@@ -22,6 +22,9 @@ public class LoginInfoHolder {
         return CONTEXT.get();
     }
 
+    /**
+     * 使用ThreadLocal 的线程变量 需要用完后调用一次清理 防止内存溢出s
+     */
     public static void clear() {
         CONTEXT.remove();
     }

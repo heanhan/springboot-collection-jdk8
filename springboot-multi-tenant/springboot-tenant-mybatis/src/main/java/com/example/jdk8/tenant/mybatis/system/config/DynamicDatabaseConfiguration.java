@@ -12,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.util.CollectionUtils;
 
 import javax.sql.DataSource;
@@ -66,6 +67,8 @@ public class DynamicDatabaseConfiguration {
      * @description: 定义一个mybatis的SqlSessionFaction的工厂
      * @date: 2025/1/24
      **/
+    @Bean
+    @Primary
     public SqlSessionFactory sqlSessionFactory() throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(multipleDataSource());
@@ -78,7 +81,7 @@ public class DynamicDatabaseConfiguration {
     }
 
     /**
-     * @description: 默认一个朱数据源的事务管理器
+     * @description: 默认一个主数据源的事务管理器
      * @date: 2025/1/24
      * @param: dataSource
      **/
@@ -86,5 +89,10 @@ public class DynamicDatabaseConfiguration {
     @Primary
     public DataSourceTransactionManager multipleTransactionManager(@Qualifier("multipleDataSource") DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);
+    }
+
+    //
+    public void initDatabase() {
+
     }
 }
