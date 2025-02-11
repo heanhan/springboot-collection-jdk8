@@ -28,6 +28,7 @@
         <module>springboot-rocketmq</module>
         <module>springboot-test-all</module>
         <module>springboot-multi-tenant</module>
+        <module>springboot-redis</module>
 
     </modules>
 

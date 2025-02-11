@@ -1,0 +1,23 @@
+server:
+  port: 9622
+  servlet:
+    context-path: /prod/single
+spring:
+  application:
+    name: springboot-redis-single
+  redis:
+    #    指定连接的redis的数据槽
+    host: 172.16.75.105
+    database: 0
+    port: 6379
+    #    username: redis
+    password: abcd@123456
+    #redis的连接池
+    lettuce:
+      pool:
+        # 最大活跃链接数 默认8
+        max-active: 8
+        # 最大空闲连接数 默认8
+        max-idle: 8
+        # 最小空闲连接数 默认0
+        min-idle: 0
