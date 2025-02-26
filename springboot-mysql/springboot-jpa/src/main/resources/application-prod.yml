@@ -101,9 +101,6 @@ spring:
 #        max-idle: 10 # 连接池中的最大空闲连接
 #        min-idle: 5 # 连接池中的最小空闲连接
 #        max-wait: -1 # 连接池最大阻塞等待时间（使用负值表示没有限制）
-#配置中台的地址相关信息
-url:
-  himp: http://192.168.8.32:8003/
 logging:
   level:
     org.springframework.security:

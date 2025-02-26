@@ -2,6 +2,9 @@ package com.example.jdk8.redis.single.entity;
 
 import lombok.Data;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.List;
 
@@ -17,6 +20,8 @@ public class User implements Serializable {
     /**
      * id.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     /**

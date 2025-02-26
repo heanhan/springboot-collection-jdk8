@@ -14,5 +14,5 @@ public interface UserService {
      * 新增用户
      * @return User
      */
-    User addUserInfo();
+    User addUser(User user );
 }
