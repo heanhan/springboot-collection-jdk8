@@ -29,6 +29,7 @@
         <module>springboot-test-all</module>
         <module>springboot-multi-tenant</module>
         <module>springboot-redis</module>
+        <module>springboot-ai</module>
 
     </modules>
 
