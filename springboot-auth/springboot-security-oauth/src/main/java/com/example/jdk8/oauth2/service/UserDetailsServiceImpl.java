@@ -1,5 +1,7 @@
 package com.example.jdk8.oauth2.service;
 
+import com.example.jdk8.oauth2.entity.Permission;
+import com.example.jdk8.oauth2.entity.Role;
 import com.example.jdk8.oauth2.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;

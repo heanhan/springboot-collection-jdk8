@@ -1,7 +1,6 @@
 package com.example.jdk8.oauth2.config;
 
 import com.alibaba.fastjson.parser.ParserConfig;
-import com.example.jdk8.redis.single.config.FastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;

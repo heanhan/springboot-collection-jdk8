@@ -1,0 +1,104 @@
+server:
+  port: 9550
+  servlet:
+    context-path: /oauth/api
+spring:
+  application:
+    name: springboot-security-oauth
+  redis:
+    #    \u6307\u5B9A\u8FDE\u63A5\u7684redis\u7684\u6570\u636E\u69FD
+    host: 172.16.75.105
+    database: 0
+    port: 6379
+    #    username: redis
+    password: abcd@123456
+    #redis\u7684\u8FDE\u63A5\u6C60
+    lettuce:
+      pool:
+        # \u6700\u5927\u6D3B\u8DC3\u94FE\u63A5\u6570 \u9ED8\u8BA48
+        max-active: 8
+        # \u6700\u5927\u7A7A\u95F2\u8FDE\u63A5\u6570 \u9ED8\u8BA48
+        max-idle: 8
+        # \u6700\u5C0F\u7A7A\u95F2\u8FDE\u63A5\u6570 \u9ED8\u8BA40
+        min-idle: 0
+  #\u914D\u7F6Emysql\u548Cjpa \u76F8\u5173\u914D\u7F6E
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.16.75.105:3306/springboot_security_oauth?characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: abcd@123456
+    # druid \u8FDE\u63A5\u6C60\u7BA1\u7406
+    druid:
+      filter:
+        config:
+          #\u5F00\u542F\u5BC6\u94A5\u52A0\u5BC6
+          enabled: true
+        stat:
+          enabled: true
+      # \u914D\u7F6E\u9ED8\u8BA4\u7684\u76D1\u63A7\u7EDF\u8BA1\u62E6\u622A\u7684Filter
+      # \u4E0D\u914D\u7F6E\u5219\u76D1\u63A7\u9875\u9762\u4E2D\u7684SQL\u65E0\u6CD5\u7EDF\u8BA1
+      # stat - SQL\u76D1\u63A7\u914D\u7F6E
+      # wall - SQL\u9632\u706B\u5899\u914D\u7F6E
+      # slf4j - Druid\u65E5\u5FD7\u914D\u7F6E
+      filters: stat,wall,slf4j
+      # \u521D\u59CB\u5316\u8FDE\u63A5\u6C60\u5927\u5C0F
+      initial-size: 5
+      # \u8FDE\u63A5\u6C60\u6700\u5927\u8FDE\u63A5\u6570
+      max-active: 20
+      # \u6BCF\u4E2A\u8FDE\u63A5\u4E0APSCache\u7684\u6700\u5927\u503C
+      # \u5982\u679C\u5927\u4E8E0\uFF0Cpool-prepared-statements\u81EA\u52A8\u5F00\u542F
+      max-pool-prepared-statement-per-connection-size: -1
+      # \u8FDE\u63A5\u65F6\u6700\u5927\u7B49\u5F85\u65F6\u95F4\uFF08\u5355\u4F4D\uFF1A\u6BEB\u79D2\uFF09
+      max-wait: 60000
+      # \u4FDD\u6301\u7A7A\u95F2\u8FDE\u63A5\u4E0D\u88AB\u5173\u95ED\u7684\u6700\u5C0F\u751F\u5B58\u65F6\u95F4\uFF08\u5355\u4F4D\uFF1A\u6BEB\u79D2\uFF09
+      min-evictable-idle-time-millis: 300000
+      # \u8FDE\u63A5\u6C60\u6700\u5C0F\u7A7A\u95F2\u6570
+      min-idle: 5
+      # \u662F\u5426\u5F00\u542FPSCache\uFF0C\u5373\u662F\u5426\u7F13\u5B58preparedStatement\uFF08\u63D0\u5347\u5199\u5165\u3001\u67E5\u8BE2\u6548\u7387\uFF09
+      # \u5EFA\u8BAE\u5728\u652F\u6301\u6E38\u6807\u7684\u6570\u636E\u5E93\u5F00\u542F\uFF0C\u4F8B\u5982\uFF1AOracle
+      pool-prepared-statements: false
+      # \u68C0\u6D4B\u83B7\u53D6\u8FDE\u63A5\u65F6\u7684\u6709\u6548\u6027
+      # \u5F00\u542F\u540E\u4F1A\u5F71\u54CD\u6027\u80FD
+      test-on-borrow: false
+      # \u68C0\u6D4B\u5F52\u8FD8\u8FDE\u63A5\u65F6\u7684\u6709\u6548\u6027
+      # \u5F00\u542F\u540E\u4F1A\u5F71\u54CD\u6027\u80FD
+      test-on-return: false
+      # \u68C0\u6D4B\u7A7A\u95F2\u8FDE\u63A5
+      # \u4E0D\u5F71\u54CD\u6027\u80FD\uFF0C\u5EFA\u8BAE\u5F00\u542F
+      test-while-idle: true
+      # \u68C0\u6D4B\u5173\u95ED\u7A7A\u95F2\u8FDE\u63A5\u7684\u65F6\u95F4\u95F4\u9694\uFF08\u5355\u4F4D\uFF1A\u6BEB\u79D2\uFF09
+      time-between-eviction-runs-millis: 60000
+      # \u68C0\u6D4B\u8FDE\u63A5\u6709\u6548\u7684SQL
+      # \u4E3A\u7A7A\u5219test-while-idle\u3001test-on-borrow\u3001test-on-return\u914D\u7F6E\u5931\u6548
+      validation-query: SELECT 1
+      # \u68C0\u6D4B\u8FDE\u63A5\u662F\u5426\u6709\u6548\u7684\u8D85\u65F6\u65F6\u95F4
+      validation-query-timeout: 1
+      stat-view-servlet:
+        # \u8BBF\u95EE\u767D\u540D\u5355
+        allow: 127.0.0.1
+        # \u914D\u7F6E\u7EDF\u8BA1\u9875\u9762
+        enabled: true
+        # \u8BBF\u95EE\u5BC6\u7801
+        login-password: 123456
+        # \u8BBF\u95EE\u7528\u6237\u540D
+        login-username: root
+        # \u5141\u8BB8\u91CD\u7F6E\u76D1\u63A7\u6570\u636E
+        reset-enable: true
+      web-stat-filter:
+        # \u914D\u7F6E\u7EDF\u8BA1\u9875\u9762\u8FC7\u6EE4
+        enabled: true
+        # \u6392\u9664\u8DEF\u5F84
+        exclusions: .js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*
+        # \u5F00\u542Fsession\u7EDF\u8BA1
+        session-stat-enable: true
+        # session\u7EDF\u8BA1\u7684\u6700\u5927\u4E2A\u6570
+        session-stat-max-count: 100
+        # \u8FC7\u6EE4\u8DEF\u5F84
+        url-pattern: /*
+  #\u914D\u7F6Ejpa\u7684\u7B56\u7565
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy
+    show-sql: true

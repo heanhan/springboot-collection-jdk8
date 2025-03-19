@@ -30,6 +30,7 @@
         <module>springboot-multi-tenant</module>
         <module>springboot-redis</module>
         <module>springboot-ai</module>
+        <module>springboot-jobs</module>
 
     </modules>
 

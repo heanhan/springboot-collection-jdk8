@@ -1,0 +1,9 @@
+server:
+  port: 8710
+  servlet:
+    context-path: /powerjob
+spring:
+  application:
+    name: springboot-powerjob
+  profiles:
+    active: @profiles.active@

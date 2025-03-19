@@ -1,0 +1,18 @@
+powerjob:
+  worker:
+    enabled: true
+    enable-test-mode: false
+    # 数据传输端口，默认27777
+    port: 27777
+    # 应用名称，与服务端创建的应用账号的名称保持一致
+    app-name: power-job
+    # 服务端地址，多个用,隔开
+    server-address: 172.16.75.105:7700
+    # 通讯协议，4.3.0之后支持http和akka，4.3.0之前仅支持akka，官方推荐http
+    protocol: http
+    # 任务返回结果信息的最大长度，超过该值将被截断
+    max-result-length: 4096
+    # 同时运行的轻量级任务数量上限
+    max-lightweight-task-num: 1024
+    # 同时运行的重量级任务数量上限
+    max-heavy-task-num: 64
