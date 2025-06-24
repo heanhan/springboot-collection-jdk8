@@ -7,24 +7,19 @@
         <version>1.0</version>
     </parent>
 
-    <groupId>com.example.jdk8.rocketmq</groupId>
-    <artifactId>springboot-rocketmq</artifactId>
-    <packaging>jar</packaging>
+    <artifactId>springboot-mq</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>springboot-rocketmq</module>
+    </modules>
 
-    <name>springboot-rocketmq</name>
+    <name>springboot-mq</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
-
-        <dependency>
-            <groupId>com.example.jdk8</groupId>
-            <artifactId>common-web</artifactId>
-            <version>1.0</version>
-        </dependency>
-
 
     </dependencies>
 </project>

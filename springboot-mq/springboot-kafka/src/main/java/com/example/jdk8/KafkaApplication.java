@@ -1,18 +1,17 @@
-package com.example.jdk8.langChain4J;
+package com.example.jdk8;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
- * 基于LangChain4i实现的大模型文本交互
+ * Hello world!
  *
  */
-
 @SpringBootApplication
-public class LangChain4JApplication
+public class KafkaApplication
 {
     public static void main( String[] args )
     {
-        SpringApplication.run(LangChain4JApplication.class,args);
+        SpringApplication.run(KafkaApplication.class, args);
     }
 }

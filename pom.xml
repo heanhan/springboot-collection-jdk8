@@ -20,17 +20,17 @@
         <module>springboot-arthas-demo</module>
         <module>springboot-mongodb</module>
         <module>springboot-webservice</module>
-        <module>springboot-auth</module>
+<!--        <module>springboot-auth</module>-->
         <module>springboot-mdc-log</module>
+        <module>springboot-jobs</module>
         <module>springboot-es</module>
         <module>springboot-mysql</module>
         <module>springboot-files</module>
-        <module>springboot-rocketmq</module>
         <module>springboot-test-all</module>
-        <module>springboot-multi-tenant</module>
+<!--        <module>springboot-multi-tenant</module>-->
         <module>springboot-redis</module>
-        <module>springboot-ai</module>
-        <module>springboot-jobs</module>
+        <module>springboot-mq</module>
+        <module>springboot-mq/springboot-kafka</module>
 
     </modules>
 
