@@ -31,6 +31,7 @@
         <module>springboot-redis</module>
         <module>springboot-mq</module>
         <module>springboot-mq/springboot-kafka</module>
+        <module>springboot-redis/springboot-redis-mq</module>
 
     </modules>
 

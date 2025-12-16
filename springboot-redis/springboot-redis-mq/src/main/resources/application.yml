@@ -1,0 +1,32 @@
+server:
+  port: 8200
+# 主业务 Redis（原来的配置保持不变）
+spring:
+  application:
+    name: spring-redis-mq
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+    password: xxxx
+    jedis:
+      pool:
+        max-active: 20
+        max-idle: 10
+        min-idle: 5
+
+# 专用于订阅第三方 消息队列的 Redis 配置（完全独立！）
+redissubscrip:
+  event: true                 # 一键开关，false 就彻底不连第三方 Redis
+  mq:
+    enabled: true
+    # 方式一：集群模式（推荐，优先级最高）
+    cluster-nodes: 192.168.8.31:7001,192.168.8.32:7001,192.168.8.33:7001
+    # 方式二：单机模式（如果上面没配，就走这里）
+    host: 192.168.8.31
+    port: 7001
+    database: 0
+    password: your_password    # 公用密码，单机/集群都生效
+    timeout: 30000             # 连接 + 读取超时（毫秒）
+    max-redirects: 5           # 集群专属参数，单机模式自动忽略
+    topic-name: channel_cdss
