@@ -124,7 +124,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     //AuthenticationException
-    @ExceptionHandler({ArithmeticException.class})
+    @ExceptionHandler({AuthenticationException.class})
     public ResultBody exception(AuthenticationException e, HttpServletRequest request, HttpServletResponse response) {
         log.error("request error!! method:{} uri:{}", request.getMethod(), request.getRequestURI());
         log.error("服务报错详情：{},", "报错的服务: "+errorSystem +",错误详情: "+ e.toString());

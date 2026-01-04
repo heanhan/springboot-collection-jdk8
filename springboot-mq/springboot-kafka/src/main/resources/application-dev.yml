@@ -1,11 +1,21 @@
 spring:
   kafka:
-    bootstrap-servers: 172.16.75.106:9092,172.16.75.106:9093,172.16.75.106:9094
-    producer:
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    bootstrap-servers: 172.16.75.110:19092   # 保持你的宿主机 IP
     consumer:
-      group-id: my-group
+      group-id: cdss480
       auto-offset-reset: earliest
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      enable-auto-commit: false
+      max-poll-interval-ms: 900000
+      max-poll-records: 100
+      session-timeout-ms: 30000
+      heartbeat-interval-ms: 10000
+    listener:
+      topics: load_to_cdss
+      enabled: true
+    properties:
+      security.protocol: SASL_PLAINTEXT
+      sasl.mechanism: PLAIN
+      # 新增这一行：内联 JAAS 配置（关键！）
+#      sasl.jaas.config: org.apache.kafka.common.security.plain.PlainLoginModule required username="dev" password="jhmkdev";
+kafka:
+  enabled: true  # 在需要使用 Kafka 的环境中设置为 true

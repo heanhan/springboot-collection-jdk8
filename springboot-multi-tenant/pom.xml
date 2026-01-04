@@ -12,7 +12,6 @@
     <!--多租户的模块-->
     <name>springboot-multi-tenant</name>
     <modules>
-        <module>springboot-tenant-mybatis</module>
         <module>springboot-tenant-jpa</module>
     </modules>
 
